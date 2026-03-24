@@ -400,6 +400,7 @@
                 game: {
                     board: Array(9).fill(""),
                     turn: "X",
+                    firstTurn: "X",
                     status: "waiting",
                     round: 1,
                     p1: { id: myId, name: myName, score: 0 },
@@ -561,9 +562,12 @@
         }
 
         function resetBoard() {
+            const prevFirst = gameState?.firstTurn || "X";
+            const nextFirst = prevFirst === "X" ? "O" : "X";
             update(gameRef, {
                 board: Array(9).fill(""),
-                turn: "X",
+                turn: nextFirst,
+                firstTurn: nextFirst,
                 round: (gameState?.round || 1) + 1
             });
         }
